@@ -1,0 +1,12 @@
+frontend myClient
+        bind *:80
+        bind *:443 ssl crt /etc/letsencrypt/live/www.alainquentin.tech/haproxy.pem
+        timeout client 60s
+        default_backend myservers
+        mode http
+backend myservers
+        timeout connect 5s
+        timeout server 10s
+        server 6115-web-01 18.206.168.14:80 check
+        server 6115-web-02 18.205.22.185:80 check
+        mode http
